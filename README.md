@@ -303,7 +303,7 @@ com.checker.xposed_hook.XposedHook
 
 ## 四、使用
 
-1）编译项目，安装Xposed模块到VirtualXposed，并确认已勾选并生效（可查看VirtualXposed入门教程）。
+1）编译项目，安装Xposed模块到VirtualXposed，并确认已勾选并生效（可查看[VirtualXposed入门教程](./Xposed虚拟环境VirtualXposed入门教程.md)）。
 
 2）将需要检测的目标app到VirtualXposed，注意不要使用加固后的app，可能会无法打开。
 
