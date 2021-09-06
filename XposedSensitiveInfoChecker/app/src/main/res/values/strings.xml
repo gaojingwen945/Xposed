@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">XposedChecker</string>
+    <string name="info">获取敏感信息检测</string>
+</resources>
