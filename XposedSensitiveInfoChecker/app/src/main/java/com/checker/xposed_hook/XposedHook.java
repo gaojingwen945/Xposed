@@ -259,7 +259,7 @@ public class XposedHook implements IXposedHookLoadPackage {
                     }
                 });
 
-        // 获取SDK卡挂载状态
+        // 获取SD卡挂载状态
         XposedHelpers.findAndHookMethod(
                 Environment.class.getName(),
                 lpparam.classLoader,
@@ -268,7 +268,7 @@ public class XposedHook implements IXposedHookLoadPackage {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
-                        XposedBridge.log("\n获取SDK卡挂载状态：调用Environment.getExternalStorageState()");
+                        XposedBridge.log("\n获取SD卡挂载状态：调用Environment.getExternalStorageState()");
                         if (PRINT_STACK_TRACE) {
                             XposedBridge.log(getMethodStack());
                         }

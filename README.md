@@ -38,17 +38,16 @@ Xposed 是一个 Android 平台上的动态劫持框架，通过替换手机上�
 
 现在通过使用Xposed技术来hook系统api调用的方式，检测获取隐私信息api的调用，目前已纳入检测范围的有以下Api：
 
-1）获取MAC地址：WifiInfo.getMacAddress()
-
-2）获取MAC地址：NetworkInterface.getHardwareAddress()
-
-3）获取IMEI/deviceId：TelephonyManager.getDeviceId()
-
-4）获取IMSI：TelephonyManager.getSubscriberId()
-
-5）获取IP地址：WiFi：WifiInfo.getIpAddress()，Mobile：NetworkInterface.getInetAddresses()
-
-6）获取安装列表：PackageManager.getInstalledPackages(int)
+1. 获取MAC地址：WifiInfo.getMacAddress()
+2. 获取MAC地址：NetworkInterface.getHardwareAddress()
+3. 获取IMEI/deviceId：TelephonyManager.getDeviceId()
+4. 获取IMSI：TelephonyManager.getSubscriberId()
+5. 获取IP地址：WiFi：WifiInfo.getIpAddress()，Mobile：NetworkInterface.getInetAddresses()
+6. 获取安装列表：PackageManager.getInstalledPackages(int)
+7. 获取Android ID：Secure.getString(context.getContentResolver(), Secure.ANDROID_ID)
+8. 获取设备硬件序列号：Build.getSerial()
+9. 获取SIM卡序列号：TelephonyManager.getSimSerialNumber()
+10. 获取SD卡挂载状态：Environment.getExternalStorageState()
 
 ## 三、实现
 
