@@ -1,8 +1,11 @@
 package com.checker.xposed_hook;
 
+import android.content.ContentResolver;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.os.Build;
+import android.os.Environment;
+import android.provider.Settings;
 
 import androidx.annotation.RequiresApi;
 
@@ -202,6 +205,78 @@ public class XposedHook implements IXposedHookLoadPackage {
                         }
                     }
                 });
+
+        // Android ID
+        XposedHelpers.findAndHookMethod(
+                "android.provider.Settings.Secure",
+                lpparam.classLoader,
+                "getString",
+                ContentResolver.class,
+                String.class,
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+                        if (Settings.Secure.ANDROID_ID.equals(param.args[1])) {
+                            XposedBridge.log("\n获取Android ID：调用Secure.getString(ContentResolver, String) where String==Secure.ANDROID_ID");
+                            if (PRINT_STACK_TRACE) {
+                                XposedBridge.log(getMethodStack());
+                            }
+                        }
+                    }
+                }
+        );
+
+        // 设备硬件序列号SN
+        XposedHelpers.findAndHookMethod(
+                Build.class.getName(),
+                lpparam.classLoader,
+                "getSerial",
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+                        XposedBridge.log("\n获取设备硬件序列号SN：调用Build.getSerial()");
+                        if (PRINT_STACK_TRACE) {
+                            XposedBridge.log(getMethodStack());
+                        }
+                    }
+                }
+        );
+
+        // SIM卡序列号
+        XposedHelpers.findAndHookMethod(
+                android.telephony.TelephonyManager.class.getName(),
+                lpparam.classLoader,
+                "getSimSerialNumber",
+                new XC_MethodHook() {
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+                        XposedBridge.log("\n获取SIM卡序列号：调用TelephonyManager.getSimSerialNumber()");
+                        if (PRINT_STACK_TRACE) {
+                            XposedBridge.log(getMethodStack());
+                        }
+                    }
+                });
+
+        // 获取SDK卡挂载状态
+        XposedHelpers.findAndHookMethod(
+                Environment.class.getName(),
+                lpparam.classLoader,
+                "getExternalStorageState",
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+                        XposedBridge.log("\n获取SDK卡挂载状态：调用Environment.getExternalStorageState()");
+                        if (PRINT_STACK_TRACE) {
+                            XposedBridge.log(getMethodStack());
+                        }
+                    }
+                }
+        );
+
+
     }
 
     private String getMethodStack() {
