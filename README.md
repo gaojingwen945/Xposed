@@ -48,6 +48,7 @@ Xposed 是一个 Android 平台上的动态劫持框架，通过替换手机上�
 8. 获取设备硬件序列号：Build.getSerial()
 9. 获取SIM卡序列号：TelephonyManager.getSimSerialNumber()
 10. 获取SD卡挂载状态：Environment.getExternalStorageState()
+11. 获取正在运行的所有应用程序进程：ActivityManager.getRunningAppProcesses()
 
 ## 三、实现
 
@@ -316,7 +317,7 @@ com.checker.xposed_hook.XposedHook
 
 <img src="./imgs/Check_Results.png" alt="Check_Results" style="zoom:50%;" />
 
-4）若在同意隐私协议前，只有“开始检测”日志，而无敏感信息Api调用日志，就说明目标App已经合规了；若不合规，则需要查看其Api调用堆栈，将相关调用挪到隐私协议之后。
+4）若在同意隐私协议前，只有“开始检测”日志，而无敏感信息Api调用日志，就说明目标App已经合规了；若不合规，则需要查看其Api调用堆栈，将相关调用挪到隐私协议之后。保存下来的日志文件一般在“/sdcard/Android/data/de.robv.android.xposed.installer/files”目录下。
 
 ## 参考文档
 

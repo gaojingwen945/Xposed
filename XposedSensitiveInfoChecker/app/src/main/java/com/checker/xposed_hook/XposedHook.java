@@ -1,5 +1,6 @@
 package com.checker.xposed_hook;
 
+import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -276,7 +277,22 @@ public class XposedHook implements IXposedHookLoadPackage {
                 }
         );
 
-
+        // 获取正在运行的所有应用程序进程
+        XposedHelpers.findAndHookMethod(
+                ActivityManager.class.getName(),
+                lpparam.classLoader,
+                "getRunningAppProcesses",
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+                        XposedBridge.log("\n获取正在运行的所有应用程序进程：调用ActivityManager.getRunningAppProcesses()");
+                        if (PRINT_STACK_TRACE) {
+                            XposedBridge.log(getMethodStack());
+                        }
+                    }
+                }
+        );
     }
 
     private String getMethodStack() {
