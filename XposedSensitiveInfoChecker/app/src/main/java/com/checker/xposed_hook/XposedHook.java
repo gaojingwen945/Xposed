@@ -35,7 +35,7 @@ public class XposedHook implements IXposedHookLoadPackage {
         // getSigningInfo(lpparam);
 
         // 可用于屏蔽签名校验
-        rewriteMetaData(lpparam, "AppSignature", "You Are Hooked");
+        // rewriteMetaData(lpparam, "AppSignature", "You Are Hooked");
 
         // 检查敏感信息获取
         checkPrivateInfoApis(lpparam);
