@@ -1,6 +1,7 @@
 package com.checker.xposed_hook;
 
 import android.app.ActivityManager;
+import android.content.ClipboardManager;
 import android.content.ContentResolver;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -287,6 +288,23 @@ public class XposedHook implements IXposedHookLoadPackage {
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
                         XposedBridge.log("\n获取正在运行的所有应用程序进程：调用ActivityManager.getRunningAppProcesses()");
+                        if (PRINT_STACK_TRACE) {
+                            XposedBridge.log(getMethodStack());
+                        }
+                    }
+                }
+        );
+
+        // 获取剪贴板信息
+        XposedHelpers.findAndHookMethod(
+                ClipboardManager.class.getName(),
+                lpparam.classLoader,
+                "getPrimaryClip",
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+                        XposedBridge.log("\n获取剪贴板信息：调用ClipboardManager.getPrimaryClip()");
                         if (PRINT_STACK_TRACE) {
                             XposedBridge.log(getMethodStack());
                         }
