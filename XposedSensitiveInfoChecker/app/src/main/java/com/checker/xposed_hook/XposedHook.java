@@ -208,6 +208,22 @@ public class XposedHook implements IXposedHookLoadPackage {
                     }
                 });
 
+        // 获取安装列表：抽象方法需要找到其实现类来hook
+        XposedHelpers.findAndHookMethod(
+                "android.app.ApplicationPackageManager",
+                lpparam.classLoader,
+                "getInstalledApplications",
+                int.class,
+                new XC_MethodHook() {
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+                        XposedBridge.log("\n获取安装列表：调用PackageManager.getInstalledApplications(int)");
+                        if (PRINT_STACK_TRACE) {
+                            XposedBridge.log(getMethodStack());
+                        }
+                    }
+                });
+
         // Android ID
         XposedHelpers.findAndHookMethod(
                 "android.provider.Settings.Secure",
