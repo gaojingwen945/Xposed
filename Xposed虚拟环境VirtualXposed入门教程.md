@@ -14,7 +14,7 @@
 
 ## 1、准备虚拟环境
 
-安装VirtualXposed.apk（[V0.18.2下载链接](https://github.com/android-hacker/VirtualXposed/releases/download/0.18.2/VirtualXposed_0.18.2.apk)）
+安装VirtualXposed.apk（[V0.18.2下载链接](https://github.com/android-hacker/VirtualXposed/releases/download/0.18.2/VirtualXposed_0.18.2.apk)）（注：经测试，这个版本的VirtualXposed可以兼容安卓10系统（华为Mate30），安卓14系统上可能出现应用拷贝过去一直loading等启动不起来的情况，其他系统兼容情况暂不清楚。）
 
 安装好后，打开VirtualXposed，会显示虚拟环境桌面：
 
